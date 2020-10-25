@@ -6,12 +6,26 @@
             </div>
         </div>
 
-        <div class="row row-2-cols-lg no-collapse equal-height">
+        <div class="row row-2-cols-lg no-collapse equal-height">            
+            <div class="col">
+                <f-card class="home-block">
+                    <h2 class="h3">{{ $t('view_home.epochs') }}</h2>
+                    <div class="num">{{ cEpochsCount | formatHexToInt }}</div>
+                </f-card>
+            </div>
             <div class="col">
                 <router-link :to="{name: 'blocks'}" class="no-effect">
                     <f-card class="home-block" hover>
                         <h2 class="h3">{{ $t('view_home.blocks') }} <icon data="@/assets/svg/angle-right.svg" color="#999"></icon></h2>
                         <div class="num">{{ cBlocksCount | formatHexToInt }}</div>
+                    </f-card>
+                </router-link>
+            </div>
+            <div class="col">
+                <router-link :to="{name: 'transactions'}" class="no-effect">
+                    <f-card class="home-block" hover>
+                        <h2 class="h3">{{ $t('view_home.transactions') }} <icon data="@/assets/svg/angle-right.svg" color="#999"></icon></h2>
+                        <div class="num">{{ cTransactionsCount | formatHexToInt }}</div>
                     </f-card>
                 </router-link>
             </div>
@@ -28,14 +42,6 @@
                     <h2 class="h3">{{ $t('view_home.accounts') }}</h2>
                     <div class="num">{{ cAccountsCount | formatHexToInt }}</div>
                 </f-card>
-            </div>
-            <div class="col">
-                <router-link :to="{name: 'transactions'}" class="no-effect">
-                    <f-card class="home-block" hover>
-                        <h2 class="h3">{{ $t('view_home.transactions') }} <icon data="@/assets/svg/angle-right.svg" color="#999"></icon></h2>
-                        <div class="num">{{ cTransactionsCount | formatHexToInt }}</div>
-                    </f-card>
-                </router-link>
             </div>
         </div>
     </div>
@@ -61,7 +67,6 @@
                             transactions
                             accounts
                             validators
-                            sfcLockingEnabled
                             sealedEpoch {
                                 id
                                 totalSupply
@@ -74,6 +79,10 @@
         },
 
         computed: {
+            cEpochsCount() {
+                return (this.state ? this.state.sealedEpoch.id : 0);
+            },
+            
             cBlocksCount() {
                 return (this.state ? this.state.blocks : 0);
             },

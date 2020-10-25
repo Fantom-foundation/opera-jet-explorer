@@ -45,10 +45,6 @@
         {
             "url": "/blocks",
             "title": "Blocks"
-        },
-        {
-            "url": "/staking",
-            "title": "Staking"
         }
     ],
 
@@ -58,11 +54,12 @@
     "view_home": {
         "title": "Home",
         "search_input_placeholder": "Search by addresses, transactions, and blocks",
-        "search_button_label": "Search",
+        "search_button_label": "Search",        
+        "epochs": "Epochs",
         "blocks": "Blocks",
+        "transactions": "@:transactions",
         "validators": "@:validators",
         "accounts": "Accounts",
-        "transactions": "@:transactions",
         "back_to_home": "@:back_to_home"
     },
     "view_not_found": {
