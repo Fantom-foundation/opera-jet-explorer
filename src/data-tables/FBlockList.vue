@@ -57,7 +57,7 @@
             /** Number of items per page. */
             itemsPerPage: {
                 type: Number,
-                default: 40
+                default: 10
             }
         },
 

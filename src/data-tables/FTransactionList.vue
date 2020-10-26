@@ -14,7 +14,7 @@
                 fixed-header
                 @fetch-more="onFetchMore"
             >
-<!--
+
                 <template v-slot:column-created="{ value, column }">
                     <template v-if="column">
                         {{ value | formatDate }}
@@ -23,7 +23,7 @@
                         {{ value | formatDate }}
                     </template>
                 </template>
--->
+
 
                 <template v-slot:column-hash="{ value, column }">
                     <div v-if="column" class="row no-collapse no-vert-col-padding">
@@ -197,7 +197,7 @@
             /** Number of items per page. */
             itemsPerPage: {
                 type: Number,
-                default: 40
+                default: 10
             },
 
             /** Display loading message. */
@@ -231,8 +231,8 @@
                                     hash
                                     from
                                     to
+                                    index
                                     value
-                                    gasUsed
                                     block {
                                         number
                                         timestamp
@@ -266,7 +266,7 @@
                 dColumns: [
 /*
                     {
-                        name: 'created',
+                        name: 'created',                        
                         readValueFrom: 'timestamp',
                         hidden: !this.cMobileView
                     },
@@ -277,7 +277,7 @@
                         width: '200px',
                         itemProp: `${!this.withoutCursor ? 'transaction.' : ''}hash`
                     },
-/*
+
                     {
                         name: 'block',
                         label: this.$t('view_transaction_list.block'),
@@ -286,7 +286,15 @@
                         formatter: formatHexToInt,
                         hidden: this.cMobileView
                     },
-*/
+                    {
+                        name: 'index',
+                        label: 'Index',
+                        width: '100px',
+                        itemProp: `${!this.withoutCursor ? 'transaction.' : ''}index`,
+                        formatter: formatHexToInt,
+                        hidden: this.cMobileView
+                    },
+
                     {
                         name: 'timestamp',
                         label: this.$t('view_transaction_list.time'),
@@ -294,7 +302,7 @@
                         // width: '220px',
                         hidden: this.cMobileView
                     },
-                    {
+/*                    {
                         name: 'address',
                         label: this.$t('view_transaction_list.address'),
                         // width: '460px',
@@ -315,35 +323,28 @@
                         hidden: !this.addressCol
                         // width: '180px'
                     },
-                    {
+ */                   {
                         name: 'from',
                         label: this.$t('view_transaction_list.from'),
                         itemProp: `${!this.withoutCursor ? 'transaction.' : ''}from`,
-                        hidden: !!this.addressCol
-                        // width: '180px'
+                        //hidden: !!this.addressCol,
+                        width: '200px'
                     },
                     {
                         name: 'to',
                         label: this.$t('view_transaction_list.to'),
                         itemProp: `${!this.withoutCursor ? 'transaction.' : ''}to`,
-                        hidden: !!this.addressCol
-                        // width: '180px'
-                    },
-                    {
-                        name: 'gasUsed',
-                        label: this.$t('view_transaction_list.gas_used'),
-                        itemProp: `${!this.withoutCursor ? 'transaction.' : ''}gasUsed`,
-                        formatter: (_value) => formatHexToInt(_value),
-                        // width: '180px'
+                        //hidden: !!this.addressCol,
+                        width: '200px'
                     },
                     {
                         name: 'amount',
-                        label: `${this.$t('view_transaction_list.amount')} (FTM)`,
+                        label: `${this.$t('view_transaction_list.amount')} (wei)`,
                         itemProp: `${!this.withoutCursor ? 'transaction.' : ''}value`,
                         formatter: _value => {
-                            return formatNumberByLocale(numToFixed(WEIToFTM(_value), 2), 2)
+                            return formatNumberByLocale(numToFixed(_value, 0), 0)
                         },
-                        width: '150px',
+                        width: '120px',
                         css: {
                             textAlign: 'right'
                         }
