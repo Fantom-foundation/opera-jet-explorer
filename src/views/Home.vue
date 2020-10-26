@@ -69,8 +69,6 @@
                             validators
                             sealedEpoch {
                                 id
-                                totalSupply
-                                baseRewardPerSecond
                             }
                         }
                     }
